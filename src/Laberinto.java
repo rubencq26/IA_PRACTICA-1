@@ -1,10 +1,7 @@
+import java.io.*;
 import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Random;
+import java.util.ArrayList;
 
 public class Laberinto {
     private int alto;
@@ -78,5 +75,51 @@ public class Laberinto {
 
     public char[][] getLaberintoChar() {
         return laberintoChar;
+    }
+
+    public void almacenarLaberinto(String nombreArchivo) {
+        String linea;
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo))){
+            for(int i = 0; i < this.alto; i++) {
+                linea = new String();
+                linea = "";
+                for(int j = 0; j < this.ancho; j++) {
+                    linea = linea + laberintoChar[i][j];
+                }
+                writer.write(linea);
+                writer.newLine();
+            }
+            System.out.println("Archivo almacenado correctamente");
+        }catch (IOException e){
+            System.out.println("Ocurrio un error al escribir el archivo");
+            e.printStackTrace();
+        }
+    }
+
+    public void cargarLaberinto(String nombreArchivo) {
+        ArrayList<String> matriz = new ArrayList<>();
+        String linea;
+        try(BufferedReader reader = new BufferedReader(new FileReader(nombreArchivo))){
+            while ((linea = reader.readLine()) != null){
+                matriz.add(linea);
+            }
+
+            linea = matriz.get(0);
+            this.alto = matriz.size();
+            this.ancho = linea.length();
+            laberintoChar = new char[alto][ancho];
+
+            for(int i = 0;i < matriz.size();i++) {
+                linea = matriz.get(i);
+                for(int j = 0;j < linea.length();j++) {
+
+                    laberintoChar[i][j] = linea.charAt(j);
+                }
+            }
+            System.out.println("Archivo cargado correctamente");
+        }catch ( IOException e){
+            System.out.println("Ocurrio un error al escribir el archivo");
+            e.printStackTrace();
+        }
     }
 }

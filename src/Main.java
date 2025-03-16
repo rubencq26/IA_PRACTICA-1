@@ -3,8 +3,9 @@
 public class Main {
     public static void main(String[] args) {
         Laberinto laberinto = new Laberinto();
-        laberinto.generaLaberinto(10,20,1);
+        laberinto.generaLaberinto(10,17,3);
         System.out.println();
         laberinto.Pintar();
+        laberinto.almacenarLaberinto("maze4.txt");
     }
 }
