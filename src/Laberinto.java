@@ -146,4 +146,11 @@ public class Laberinto {
             e.printStackTrace();
         }
     }
+
+    public int[] getSalida(){
+        int[] salida = new int[2];
+        salida[0] = this.alto - 2;
+        salida[1] = this.ancho - 2;
+        return salida;
+    }
 }
