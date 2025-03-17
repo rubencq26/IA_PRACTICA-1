@@ -15,6 +15,29 @@ public class Laberinto {
         rand = new Random();
     }
 
+    public Laberinto(char[][] laberintoChar) {
+        actualizarLaberinto(laberintoChar);
+        rand = new Random();
+    }
+
+    public void actualizarPosicion(int x, int y, char signo ) {
+        if(laberintoChar[x][y] != 'E' && laberintoChar[x][y] != 'S') {
+            laberintoChar[x][y] = signo;
+        }
+
+    }
+
+    public void actualizarLaberinto(char[][] laberinto) {
+        this.alto = laberinto.length;
+        this.ancho = laberinto[0].length;
+        this.laberintoChar = new char[alto][ancho];
+
+        for (int i = 0; i < alto; i++) {
+            this.laberintoChar[i] = laberinto[i].clone(); // Copia profunda del array
+        }
+    }
+
+
     public int getAlto() {
         return alto;
     }
@@ -47,9 +70,10 @@ public class Laberinto {
                 }
 
             }
-            laberintoChar[1][1] = 'E';
-            laberintoChar[alto - 2][ancho - 2] = 'S';
+
         }
+        laberintoChar[1][1] = 'E';
+        laberintoChar[alto - 2][ancho - 2] = 'S';
     }
 
     public void Pintar(){
